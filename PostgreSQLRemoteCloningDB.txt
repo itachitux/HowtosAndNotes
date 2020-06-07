@@ -1,0 +1,24 @@
+
+https://stackoverflow.com/questions/1237725/copying-postgresql-database-to-another-server
+
+
+You don't need to create an intermediate file. You can do
+
+pg_dump -C -h localhost -U localuser dbname | psql -h remotehost -U remoteuser dbname
+or
+
+pg_dump -C -h remotehost -U remoteuser dbname | psql -h localhost -U localuser dbname
+using psql or pg_dump to connect to a remote host.
+
+With a big database or a slow connection, dumping a file and transfering the file compressed may be faster.
+
+As Kornel said there is no need to dump to a intermediate file, if you want to work compressed you can use a compressed tunnel
+
+pg_dump -C dbname | bzip2 | ssh  remoteuser@remotehost "bunzip2 | psql dbname"
+or
+
+pg_dump -C dbname | ssh -C remoteuser@remotehost "psql dbname"
+but this solution also requires to get a session in both ends.
+
+Note: pg_dump is for backing up and psql is for restoring. So, the first command in this answer is to copy from local to remote and the second one is from remote to local. More -> 
+https://www.postgresql.org/docs/9.6/app-pgdump.html

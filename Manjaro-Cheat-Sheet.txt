@@ -1,0 +1,26 @@
+### Install java 1.6
+cp /home/rzk/Downloads/Software/jdk-6u45-linux-i586.bin .
+ls -l
+chmod +x jdk-6u45-linux-i586.bin 
+./jdk-6u45-linux-i586.bin 
+
+### Set Default JAVA
+archlinux-java status       
+sudo archlinux-java set java-11-openjdk   
+
+
+### Teamviewer not working
+https://forum.manjaro.org/t/teamviewer-installed-from-aur-giving-error-not-ready-please-check-your-connection/44546
+
+I need help please, i have installed teamviewer package from octopi aur repository and after installing when i run it, it doesnt work.
+It is not able to connect to internet for some reason.
+
+Package link
+
+https://aur.archlinux.org/packages/teamviewer/ 73
+
+I have already tried these commands after searching for a solution on forum but nothing seems to make it work.
+
+systemctl enable teamviewerd
+systemctl start teamviewerd
+Did you reboot after the enable & start? For me, in both PCs, TV continued to not connect, until i’d rebooted. Though an irritant, it was successful, & has remained good since.
